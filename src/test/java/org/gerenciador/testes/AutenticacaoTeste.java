@@ -1,6 +1,6 @@
-package org.gerenciador.Testes;
+package org.gerenciador.testes;
 
-import org.gerenciador.Utils.BaseApi;
+import org.gerenciador.utils.BaseApi;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;

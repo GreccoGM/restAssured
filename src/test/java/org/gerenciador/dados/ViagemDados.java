@@ -1,7 +1,8 @@
-package org.gerenciador.Dados;
+package org.gerenciador.dados;
 
-import org.gerenciador.Utils.Login;
-import org.gerenciador.Utils.BaseApi;
+import io.restassured.http.ContentType;
+import org.gerenciador.utils.Login;
+import org.gerenciador.utils.BaseApi;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,8 +19,9 @@ public class ViagemDados extends BaseApi {
 
         ArrayList<Integer>  idViagens =
           given()
-                .spec(reqSpec)
-                .header("Authorization", this.tokenUsuario)
+                  .basePath("/v1")
+                  .contentType(ContentType.JSON)
+                  .header("Authorization", this.tokenUsuario)
           .when()
                 .get("/viagens")
           .then()

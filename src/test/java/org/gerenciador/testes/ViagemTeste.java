@@ -1,11 +1,11 @@
-package org.gerenciador.Testes;
+package org.gerenciador.testes;
 
-import org.gerenciador.Dados.MapDados;
-import org.gerenciador.Dados.ViagemDados;
+import org.gerenciador.utils.MapDados;
+import org.gerenciador.dados.ViagemDados;
 
 import org.apache.http.HttpStatus;
-import org.gerenciador.Utils.BaseApi;
-import org.gerenciador.Utils.Login;
+import org.gerenciador.utils.BaseApi;
+import org.gerenciador.utils.Login;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +18,7 @@ public class ViagemTeste extends BaseApi {
 
     public static String tokenUsuario;
     public static String tokenAdmin;
+    final Integer idViagemAlterada = null;
     MapDados dados = new MapDados();
     ViagemDados dadosViagem = new ViagemDados();
 
@@ -43,7 +44,6 @@ public class ViagemTeste extends BaseApi {
               .statusCode(HttpStatus.SC_CREATED)
               .body(is(not(nullValue())))
               .body("data.id", is(not(empty())))
-              .log().all()
       ;
     }
 
@@ -114,11 +114,28 @@ public class ViagemTeste extends BaseApi {
            .then()
                     .spec(resSpec)
                     .statusCode(HttpStatus.SC_NO_CONTENT)
-           ;
+
+          ;
     }
 
 @Test
     public void validarEdicaoViagem(){
+
+        Map dadosViagemB = dados.editarViagem();
+
+        Integer idViagem = dadosViagem.getIdViagem();
+
+            given()
+                    .spec(reqSpec)
+                    .header("Authorization", this.tokenAdmin)
+                    .pathParam("id", idViagem)
+                    .body(dadosViagemB)
+           .when()
+                    .put("/viagens/{id}")
+           .then()
+                    .spec(resSpec)
+                    .statusCode(HttpStatus.SC_NO_CONTENT)
+          ;
 
         given()
                 .spec(reqSpec)
@@ -129,7 +146,8 @@ public class ViagemTeste extends BaseApi {
                 .spec(resSpec)
                 .statusCode(HttpStatus.SC_OK)
                 .body(is(not(nullValue())))
-                .body("data.find{it.id == 2}.acompanhante", is("Marques")) //"+ idViagemEditada +"
+                .body("data.find{it.id == "+idViagem+"}.acompanhante", is("Marques")) //"+ idViagemEditada +"
+                .body("data.find{it.id == "+idViagem+"}.localDeDestino", equalTo("Canoas"))
         ;
 
     }

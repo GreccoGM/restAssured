@@ -1,4 +1,4 @@
-package org.gerenciador.Utils;
+package org.gerenciador.utils;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

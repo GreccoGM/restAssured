@@ -1,22 +1,20 @@
-package org.gerenciador.Utils;
+package org.gerenciador.utils;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.junit.BeforeClass;
 
+import org.gerenciador.dados.LoginDados;
 import static io.restassured.RestAssured.given;
 
 public class Login extends BaseApi{
+
+    LoginDados loginDados = new LoginDados();
 
     public String autenticarAdministrador()
     {
         String tokenAdmin =
                 given()
                         .basePath("/v1")
-                        .body("{\n" +
-                                "\"email\": \"admin@email.com\",\n" +
-                                "\"senha\": \"654321\"\n" +
-                                "}")
+                        .body(loginDados.dadosAdmin())
                         .contentType(ContentType.JSON)
                 .when()
                         .post("/auth")
@@ -31,10 +29,7 @@ public class Login extends BaseApi{
         String tokenUsuario =
                 given()
                         .basePath("/v1")
-                        .body("{\n" +
-                                "\"email\": \"usuario@email.com\",\n" +
-                                "\"senha\": \"123456\"\n" +
-                                "}")
+                        .body(loginDados.dadosUsuario())
                         .contentType(ContentType.JSON)
                 .when()
                         .post("/auth")
