@@ -18,7 +18,6 @@ public class ViagemTeste extends BaseApi {
 
     public static String tokenUsuario;
     public static String tokenAdmin;
-    final Integer idViagemAlterada = null;
     MapDados dados = new MapDados();
     ViagemDados dadosViagem = new ViagemDados();
 
@@ -31,7 +30,7 @@ public class ViagemTeste extends BaseApi {
 
 @Test
     public void validarSucessoCadastroViagem(){
-        Map dadosViagem = dados.cadastrarViagem();
+        Map dadosViagem = dados.cadastrarViagemMap();
 
         given()
               .spec(reqSpec)
@@ -47,6 +46,26 @@ public class ViagemTeste extends BaseApi {
       ;
     }
 
+    @Test
+    public void validarSucessoCadastroViagemEnvioObjJson(){
+        Object dadosViagem = dados.dadosViagemObj();
+
+        given()
+                .spec(reqSpec)
+                .header("Authorization", this.tokenAdmin)
+                .body(dadosViagem)
+                .when()
+                .post("/viagens")
+                .then()
+                .spec(resSpec)
+                .statusCode(HttpStatus.SC_CREATED)
+                .body(is(not(nullValue())))
+                .body("data.id", is(not(empty())))
+                .body("data.acompanhante", is("Gloria"))
+                .body("data.localDeDestino", is("Santa Catarina"))
+        .log().all()
+        ;
+    }
 @Test
     public void validarCamposObrigatoriosCadastroViagem(){
         given()
@@ -146,7 +165,12 @@ public class ViagemTeste extends BaseApi {
                 .spec(resSpec)
                 .statusCode(HttpStatus.SC_OK)
                 .body(is(not(nullValue())))
-                .body("data.find{it.id == "+idViagem+"}.acompanhante", is("Marques")) //"+ idViagemEditada +"
+                .body("data.find{it.id == "+idViagem+"}.acompanhante", anyOf(containsString("Jacira"),       //"+ idViagemEditada +"
+                                                                                containsString("Eveline"),
+                                                                                containsString("Naymara"),
+                                                                                containsString("Rodrigo"),
+                                                                                containsString("Gabriel"),
+                                                                                containsString("Matheus")))
                 .body("data.find{it.id == "+idViagem+"}.localDeDestino", equalTo("Canoas"))
         ;
 

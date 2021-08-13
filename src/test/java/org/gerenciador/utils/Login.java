@@ -14,7 +14,7 @@ public class Login extends BaseApi{
         String tokenAdmin =
                 given()
                         .basePath("/v1")
-                        .body(loginDados.dadosAdmin())
+                        .body(loginDados.dadosAdminObj())
                         .contentType(ContentType.JSON)
                 .when()
                         .post("/auth")

@@ -1,14 +1,24 @@
 package org.gerenciador.utils;
 
+import com.github.javafaker.Faker;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Date;
 
 public class GeraradorDados {
 
-    public String getAcompanhante(){
+    public String getAcompanhenteFaker(){
+        Faker faker = new Faker(new Locale("pt-BR"));
+        String acompanhanteFaker = faker.name().firstName();
+
+        return acompanhanteFaker;
+    }
+
+    public String getAcompanhanteEdicao(){
         String acompanhante[] = {"Jacira", "Eveline", "Naymara", "Rodrigo", "Matheus", "Gabriel"};
         String nomeAcompanhente;
 
@@ -19,6 +29,7 @@ public class GeraradorDados {
 
         return nomeAcompanhente;
     }
+
 
     public String getDestino(){
         String destino[] = {"Porto Alegre", "Gramado", "Uruguaiana", "Pelotas", "Santa Maria", "Torres"};
@@ -33,7 +44,7 @@ public class GeraradorDados {
     }
 
     public static String getRegiao(){
-        String[] regioes = {"Sul","Nordeste","Norte","Centro-Oeste","Sudeste"};
+        String regioes[] = {"Sul","Nordeste","Norte","Centro-Oeste","Sudeste"};
         String regiao;
 
         Random randomico = new Random();
