@@ -9,7 +9,7 @@ A API utilizada foi um gerenciador de viagens.
 ---
 ## 🚀 Tecnologicas e ferramentas utilizadas
 O projeto foi desenvolvido utilizando as tecnologias e ferramentas:
-- Java (versao)
+- Java (Versão 1.8)
 - Rest-assured
 ---
 ## 📦 Onde baixar o projeto
