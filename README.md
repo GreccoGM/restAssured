@@ -1,7 +1,7 @@
-#Indice
+# Indice
 - [Sobre](#-sobre)
 - [Tencologias e Ferramentas](#-tecnologicas-e-ferramentas-utilizadas)
-- [Onde baixar o projeto](#-onde-baixar-o-projeto)
+- [Como baixar o projeto](#-como-baixar-o-projeto)
 ---
 ## 📃 Sobre 
 
@@ -15,7 +15,7 @@ O projeto foi desenvolvido utilizando as tecnologias e ferramentas:
 - Rest-assured
 - [Java Faker](https://github.com/DiUS/java-faker)
 ---
-## 📦 COmo baixar o projeto
+## 📦 Como baixar o projeto
 ```bash
 #clonar o projeto do Gerenciador de Viagens
     git clone https://github.com/AntonioMontanha/gerenciador-viagens.git
